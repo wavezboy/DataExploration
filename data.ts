@@ -31,3 +31,12 @@ const friendships = [
 for (const user of users) {
   user["friends"] = [];
 }
+
+for (const [i, j] of friendships) {
+  users[i]["friends"].push(users[j]);
+  users[j]["friends"].push(users[i]);
+}
+
+users.forEach((user) => {
+  console.log(user.friends);
+});
