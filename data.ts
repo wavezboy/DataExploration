@@ -37,6 +37,19 @@ for (const [i, j] of friendships) {
   users[j]["friends"].push(users[i]);
 }
 
+// users.forEach((user) => {
+//   console.log(user.friends);
+// });
+
+const numberOfFriends = (user) => {
+  return user["friends"].length;
+};
+
+const totalConnection = users.reduce(
+  (total, user) => total + numberOfFriends(user),
+  0
+);
+
 users.forEach((user) => {
-  console.log(user.friends);
+  console.log(numberOfFriends(user));
 });
