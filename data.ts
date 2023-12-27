@@ -89,8 +89,6 @@ const result = friendsOfFriendIdsBad(users[3]);
 
 console.log(result);
 
-// console.log(users[4].friends.map((friend) => friend.id));
-// // console.log(users[0].friends.map((friend) => friend.id));
-// // console.log(users[0].friends.map((friend) => friend.id));
-// console.log(users[3].friends.map((friend) => friend.id));
-// console.log(users[5].friends.map((friend) => friend.id));
+for (const [i, j] of friendships) {
+  console.log([i, j]);
+}
