@@ -20,7 +20,8 @@ const friendships = [
   [3, 4],
   [4, 5],
   [5, 6],
-  [6, 7],
+  [5, 7],
+  [6, 8],
   [7, 8],
   [8, 9],
 ];
@@ -50,6 +51,46 @@ const totalConnection = users.reduce(
   0
 );
 
-users.forEach((user) => {
-  console.log(numberOfFriends(user));
+const c = users.map((user) => {
+  return numberOfFriends(user);
 });
+
+const addArray = (a) => {
+  let total = 0;
+  for (const i of a) {
+    total = i + total;
+  }
+
+  return total;
+};
+
+const a = [1, 2, 3];
+
+console.log(totalConnection);
+
+const num_users = users.length;
+const avg_connections = totalConnection / num_users;
+
+const num_friends_by_id = users.map((user) => [
+  user["id"],
+  numberOfFriends(user),
+]);
+
+num_friends_by_id.sort((a, b) => a[1] - b[1]);
+
+function friendsOfFriendIdsBad(user) {
+  // "foaf" is short for "friend of a friend"
+  return user.friends.flatMap((friend) =>
+    friend.friends.map((foaf) => foaf.id)
+  );
+}
+
+const result = friendsOfFriendIdsBad(users[3]);
+
+console.log(result);
+
+// console.log(users[4].friends.map((friend) => friend.id));
+// // console.log(users[0].friends.map((friend) => friend.id));
+// // console.log(users[0].friends.map((friend) => friend.id));
+// console.log(users[3].friends.map((friend) => friend.id));
+// console.log(users[5].friends.map((friend) => friend.id));
