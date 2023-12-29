@@ -66,8 +66,6 @@ const addArray = (a) => {
 
 const a = [1, 2, 3];
 
-console.log(totalConnection);
-
 const num_users = users.length;
 const avg_connections = totalConnection / num_users;
 
@@ -87,8 +85,17 @@ function friendsOfFriendIdsBad(user) {
 
 const result = friendsOfFriendIdsBad(users[3]);
 
-console.log(result);
+const friends_of_friends_ids = (user) => {
+  const counter = {};
 
-for (const [i, j] of friendships) {
-  console.log([i, j]);
-}
+  for (const friends of user.friends) {
+    for (const foaf of friends.friends) {
+      const foafId = foaf.id;
+      counter[foafId] = (counter[foafId] || 0) + 1;
+    }
+  }
+
+  return counter;
+};
+
+console.log(friends_of_friends_ids(users[0]));
