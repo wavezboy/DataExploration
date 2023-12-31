@@ -85,17 +85,33 @@ function friendsOfFriendIdsBad(user) {
 
 const result = friendsOfFriendIdsBad(users[3]);
 
-const friends_of_friends_ids = (user) => {
-  const counter = {};
+const not_the_same = (user, other_user) => {
+  return user["id"] != other_user["id"];
+};
 
-  for (const friends of user.friends) {
-    for (const foaf of friends.friends) {
-      const foafId = foaf.id;
-      counter[foafId] = (counter[foafId] || 0) + 1;
-    }
+const not_friends = (user, other_user) => {
+  for (const friend of user["friends"]) {
+    return not_the_same(friend, other_user);
   }
+};
 
-  return counter;
+console.log(not_friends(users[0], users[1]));
+
+const friends_of_friends_ids = (user) => {
+  const fofIds = [];
+
+  user.friends.forEach((friend) => {
+    friend.friends.forEach((foaf) => {
+      if (!not_the_same(user, foaf) && not_friends(user, foaf)) {
+        fofIds.push(foaf.id);
+      }
+    });
+  });
+
+  return fofIds.reduce((count, id) => {
+    count[id] = (count[id] || 0) + 1;
+    return count;
+  }, {});
 };
 
 console.log(friends_of_friends_ids(users[0]));
